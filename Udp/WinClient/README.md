@@ -1,3 +1,3 @@
 ﻿# Cliente Pipe (Winform)
 
-Para realizar pruebas y demostar uso
+Para realizar pruebas y demostrar uso
