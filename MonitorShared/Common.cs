@@ -33,9 +33,14 @@ namespace Monitor.Shared
         //public const string ServerUrl = "tcpex://dc0cfg:9090/WDMonitor";
         //public const string ServerUrl = "tcpex://alarmcenterapp:9090/WDMonitor";
 
-
         // intentos de conexion que realiza el cliente
-        public const int ConnectionAttempts = 5;
+        //public const int ConnectionAttempts = 5;
+
+        // Intervalo por defecto para enviar heartbeat, en segundos
+        public const int DefaultInterval = 60;
+
+        // Timeout por defecto para conectar el cliente pipe, en minutos
+        public const int DefaultPipeTimeout = 3;
     }
 
     static public class Functions

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Monitor.Shared</RootNamespace>
     <AssemblyName>Monitor.Shared</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -32,6 +32,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,6 +66,9 @@
     <Compile Include="ClientData.cs" />
     <Compile Include="ClientDataManager.cs" />
     <Compile Include="ClientRemoteUpdate.cs" />
+    <Compile Include="Client\HeartbeatClient.cs" />
+    <Compile Include="Client\Pipe\Client.cs" />
+    <Compile Include="Client\Udp\Client.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FormEditConfig.cs">
@@ -86,13 +90,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FSQueue.cs" />
-    <Compile Include="Heartbeat\HbReceiverPipe.cs" />
-    <Compile Include="Heartbeat\HbReceiverUdp.cs" />
-    <Compile Include="Heartbeat\HbSenderPipe.cs" />
-    <Compile Include="Heartbeat\HbSenderUdp.cs" />
     <Compile Include="Heartbeat\HeartBeat.cs" />
     <Compile Include="Heartbeat\HeartBeatGenerator.cs" />
     <Compile Include="Interface.cs" />
+    <Compile Include="Interfaces\ICommunication.cs" />
+    <Compile Include="Interfaces\ICommunicationClient.cs" />
+    <Compile Include="Interfaces\ICommunicationServer.cs" />
+    <Compile Include="Interfaces\IHeartbeatSender.cs" />
     <Compile Include="MessageBroker.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -100,10 +104,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RemoteMessages.cs" />
+    <Compile Include="Server\EventArgs.cs" />
+    <Compile Include="Server\HeartbeatServer.cs" />
+    <Compile Include="Server\Pipe\InternalPipeServer.cs" />
+    <Compile Include="Server\Pipe\PipeServer.cs" />
+    <Compile Include="Server\Udp\UdpServer.cs" />
     <Compile Include="SimpleMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemConfigData.cs" />
     <Compile Include="SystemPlusClientData.cs" />
+    <Compile Include="Utilities\EventHandlerExtensions.cs" />
+    <Compile Include="Utilities\TaskResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormEditConfig.resx">
