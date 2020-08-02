@@ -1,0 +1,28 @@
+﻿ToDo File. Proyecto MonitorShared
+
+Revisar ubicacion de las referencias a las clases en DllShared y reducir su presencia.
+
+---Lista chequeo de generacion de test
+
+Clase				Test
+ClientData			ok
+FixedSizedQueue		ok
+MessageBroker		ok		No se implementaron unit test en esta etapa.
+
+
+
+---Refactor Formulario, conectar mediante mensajes igual que los componentes. 
+ --Reimplementar edicion de propiedades. 
+ --Acceso a configuracion
+
+   DEcidir uso de Serial, si se guarda en cola como HeartBeat . revisar implementacion HB
+
+--Implementar HbReceiver HbSender via Pipe 
+
+--MOdificar clase HeartBeat, abstraer datos remitente (ip, port, pipe)
+ Modificar configuración de Cliente, incluir datos remitente (ip, port, pipe) y definir chequeos
+
+ REvisar pendientes en  ClientManager parcial ClientMan_RecepcionHB.cs
+
+
+

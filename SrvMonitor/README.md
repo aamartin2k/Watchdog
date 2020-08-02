@@ -1,3 +1,3 @@
 ﻿# Monitor.Service
 
-Componente fundamental. Monitorea los clientes y emite notificaciones. Implemnta un servicio  de Windows.
+Componente fundamental. Monitorea los clientes y emite notificaciones. Implementa un servicio  de Windows.
