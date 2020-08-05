@@ -1,0 +1,79 @@
+﻿ToDo File. Proyecto Monitor SrvMonitor
+
+ -Reorganizar estructura de Monitor y Shared
+ -Implementar uso de nuevo hb receiver
+ Implementar adicion de clientes pipe, implica cambios de configuracion e interfase
+  
+-Reorganizar estructura de Monitor.Service
+  Separar Builder en otras clases
+
+
+
+ ---decidir e implementar forma de conexin entre clt y srv zyan (autodisc, guardar config local en supervispr) etc
+ 
+ ---Especificar e implementar notif email y adjuntos
+ 
+ ---Eliminar SystemConfig.Body de la class y del form
+ --Implement system timeouts en class y form, usar en client manager
+ --Implement req/reply de client log file entre monitor y service.
+ 
+ ---Revisar funcionamieno de la salva de datos a a Ndatabase, mantener actualizada la ref local en dbhandler. Al hacer 
+ salva temporal se queda desactualizdo el cliente monitor, recibe datos hasta el momento de la salva. Revisar about: _needUpdateFlag
+ 
+ ---Revisar funcionamiento de CheckClientStatusYellow
+ 
+ ---Analizar/implementar ejecutar sub procesos de QueueManagerProcess en hilos propios
+ 
+ 
+ **************************************************************
+
+ --Implementar Tests para los cuatro modulos
+
+ Implementar Message
+
+ ---Revisar proceso Ser/Deser XML y re implementar como binary, elimnando la necesidad de la clase 
+  SystemPlusClientToSerialize
+
+  ---Realizar prototipo para comprobar gestion de NDatabase,    investigar como hace update 
+  de cambios en el objeto, si es necesario hacer store o commit.
+
+  *****
+  -Terminar refactor de secuencia Inicio/Fin, hay statements comentados en los proc StartComponente y StopComponent.+
+  
+  IMplementar metodos de Log en builder, si funciona como servicio, hace log a text file; si funciona 
+   como consola hace WriteLine.
+  ******
+
+  ---Refactor de mensajes, revisar necesidad de props Sender y Receiver.
+
+  ---Refactor de Inicio y manejo de Configuracion:
+    ---El modulo DbHandler se inicia despues del builder
+
+  ---Refactor de DbHandler, remover NDatabase, sustituir por Volante.
+   --Refactor Formulario, conectar mediante mensajes igual que los componentes. REimplementar edicion de propiedades.
+
+ ---Dividiendo Builder en parciales
+ ---Eliminando codigo sobrante Builder
+ --- Implementar chequeo de errores en secuencia de carga. Requiere revision
+ 
+  ---Simplificar arranque, ej ClientList no hace nada en StartComponent, solo al recibir la configuracion 
+       de los clientes en ReceiveSystemPlusClientData es que inicia realmente.
+   ---IMplementando arranque, terminacion de todos los modulos
+   ---Implementar envio de mensajes a archivo en Notifier
+
+   Crear modulo aparte para implementar varias formas de recibir hb de los clientes.
+   ---REFACTOR convirtiendo DbHandler a estatico coupled
+
+    Implementar metodos que retornen valores para los Test (hacer hard coupling) para los componentes 
+     gestionados por Builder: DbHandler, Notifier, ClientManager.
+
+
+Implementar control de excepciones en todas las acciones entrada/salida de client y serv Zyan.
+ 
+ implementar aviso en Supervisor al indicar cambios en serv zyan, y realizar reconexion
+ a nueva url.
+ 
+
+	--revision y arreglo de test de client manage que se safectan por el cambio de entrada de config
+	
+	---revisar implicaciones threading y sinc para cambios en DoUpdateSystem y CreateClient

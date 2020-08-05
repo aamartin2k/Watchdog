@@ -103,7 +103,7 @@ namespace Monitor.Shared.Server.Udp
                     text = _encoder.GetString((byte[])ares.AsyncState);
 
                     ipRemoteEp = (IPEndPoint)epRemote;
-                    _clientEndpoint = ipRemoteEp.Address.ToString() + ":" + ipRemoteEp.Port.ToString();
+                    _clientEndpoint = ipRemoteEp.Address.ToString() + Constants.EndpointSeparator + ipRemoteEp.Port.ToString();
 
                     OnMessageReceived(text);
                     /*

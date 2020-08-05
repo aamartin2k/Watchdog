@@ -9,7 +9,6 @@ using System;
 #endregion
 
 
-
 namespace Monitor.Shared.Utilities
 {
     public static class EventHandlerExtensions

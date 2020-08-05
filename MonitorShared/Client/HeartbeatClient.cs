@@ -69,7 +69,8 @@ namespace Monitor.Shared.Client
         /// <param name="encoder"></param>
         /// <param name="interval"></param>
         /// <param name="hbgen"></param>
-        public HeartbeatClient(string server, string pipe, int timeout, Encoding encoder, int interval, HeartBeatGenerator hbgen)
+        public HeartbeatClient(string server, string pipe, int timeout, 
+                              Encoding encoder, int interval, HeartBeatGenerator hbgen)
         {
             // Check parameters
             if (server == null)
@@ -135,7 +136,8 @@ namespace Monitor.Shared.Client
         /// <param name="encoder"></param>
         /// <param name="interval"></param>
         /// <param name="hbgen"></param>
-        public HeartbeatClient(string ipad, int remPort, int locPort, Encoding encoder, int interval, HeartBeatGenerator hbgen)
+        public HeartbeatClient(string ipad, int remPort, int locPort, Encoding encoder, 
+                               int interval, HeartBeatGenerator hbgen)
         {
             // Check paramters
             // IP Address

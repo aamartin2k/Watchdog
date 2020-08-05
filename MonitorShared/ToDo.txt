@@ -1,11 +1,11 @@
 ﻿ToDo File. Proyecto MonitorShared
 
-Integracion de UdPipe en el proyecto.
-  Eliminar clases Hb send/receive en folder Heartbeat
-   -Incorporar servidores y arreglar llamadas. --
-   -Incorporar clientes y arreglar llamadas.   --
+--Integracion de UdPipe en el proyecto.
+  ---Eliminar clases Hb send/receive en folder Heartbeat
+   --Incorporar servidores y arreglar llamadas. --
+   --Incorporar clientes y arreglar llamadas.   --
 
-
+-Restructurar clases y carpetas del proyecto
 
 
 Revisar ubicacion de las referencias a las clases en DllShared y reducir su presencia.

@@ -15,7 +15,7 @@
         Logoff = 2
     }
 
-    public enum ClientIdType { KeyByUdpPort, KeyByIdString}
+    public enum ClientIdType { KeyByUdpPort, KeyByIdString, KeyByPipe }
 
     public enum HeartbeatSenderType { SenderUdp, SenderPipe }
 }

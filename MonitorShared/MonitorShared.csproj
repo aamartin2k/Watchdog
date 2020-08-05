@@ -63,36 +63,36 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientData.cs" />
-    <Compile Include="ClientDataManager.cs" />
-    <Compile Include="ClientRemoteUpdate.cs" />
+    <Compile Include="Serializable\ClientData.cs" />
+    <Compile Include="Serializable\ClientDataManager.cs" />
+    <Compile Include="Serializable\ClientRemoteUpdate.cs" />
     <Compile Include="Client\HeartbeatClient.cs" />
     <Compile Include="Client\Pipe\Client.cs" />
     <Compile Include="Client\Udp\Client.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="FormEditConfig.cs">
+    <Compile Include="Form\FormEditConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEditConfig.designer.cs">
+    <Compile Include="Form\FormEditConfig.designer.cs">
       <DependentUpon>FormEditConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEditConfig_Client.cs">
+    <Compile Include="Form\FormEditConfig_Client.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEditConfig_Supervisor.cs">
+    <Compile Include="Form\FormEditConfig_Supervisor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEditConfig_System.cs">
+    <Compile Include="Form\FormEditConfig_System.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEditConfig_Wizard.cs">
+    <Compile Include="Form\FormEditConfig_Wizard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FSQueue.cs" />
     <Compile Include="Heartbeat\HeartBeat.cs" />
     <Compile Include="Heartbeat\HeartBeatGenerator.cs" />
-    <Compile Include="Interface.cs" />
+    <Compile Include="Interfaces\IMonitor.cs" />
     <Compile Include="Interfaces\ICommunication.cs" />
     <Compile Include="Interfaces\ICommunicationClient.cs" />
     <Compile Include="Interfaces\ICommunicationServer.cs" />
@@ -103,21 +103,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RemoteMessages.cs" />
+    <Compile Include="Messages\RemoteMessages.cs" />
     <Compile Include="Server\EventArgs.cs" />
     <Compile Include="Server\HeartbeatServer.cs" />
     <Compile Include="Server\Pipe\InternalPipeServer.cs" />
     <Compile Include="Server\Pipe\PipeServer.cs" />
     <Compile Include="Server\Udp\UdpServer.cs" />
-    <Compile Include="SimpleMessages.cs" />
+    <Compile Include="Messages\SimpleMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemConfigData.cs" />
-    <Compile Include="SystemPlusClientData.cs" />
+    <Compile Include="Serializable\SystemConfigData.cs" />
+    <Compile Include="Serializable\SystemPlusClientData.cs" />
     <Compile Include="Utilities\EventHandlerExtensions.cs" />
     <Compile Include="Utilities\TaskResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormEditConfig.resx">
+    <EmbeddedResource Include="Form\FormEditConfig.resx">
       <DependentUpon>FormEditConfig.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

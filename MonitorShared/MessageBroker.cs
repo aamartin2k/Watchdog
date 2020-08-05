@@ -1,6 +1,8 @@
 ﻿#region Descripción
 /*
-    Implementa un gestor de mensajes con sincronización de contexto.
+    Implementa un gestor de mensajes. Los receptores se suscriben para recibir 
+   mensajes concretos. Los mensajes se envian de forma asíncrona al contexto 
+   de sincronización del receptor registrado.
 */
 #endregion
 
@@ -12,12 +14,12 @@ using System.ComponentModel;
 using System.Threading;
 #endregion
 
-
 namespace Monitor.Shared
 {
     /// <summary>
-    ///  Implementa un gestor de mensajes. Los receptores se suscriben para recibir. 
-    ///  Los mensajes se envian de forma asíncrona al contexto de sincronización.
+    ///  Implementa un gestor de mensajes. Los receptores se suscriben para recibir 
+    ///  mensajes concretos. Los mensajes se envian de forma asíncrona al contexto 
+    ///  de sincronización del receptor registrado.
     /// </summary>
     internal class MessageBroker
     {

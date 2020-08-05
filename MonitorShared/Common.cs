@@ -30,11 +30,13 @@ namespace Monitor.Shared
         public const string PipeServer = ".";
         public const string PipeName = "wdpipe";
 
+        public const char EndpointSeparator = ':';
+
         //public const string ServerUrl = "tcpex://dc0cfg:9090/WDMonitor";
         //public const string ServerUrl = "tcpex://alarmcenterapp:9090/WDMonitor";
 
         // intentos de conexion que realiza el cliente
-        //public const int ConnectionAttempts = 5;
+        public const int ConnectionAttempts = 5;
 
         // Intervalo por defecto para enviar heartbeat, en segundos
         public const int DefaultInterval = 60;
