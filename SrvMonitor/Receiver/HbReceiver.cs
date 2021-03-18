@@ -77,7 +77,8 @@ namespace Monitor.Service
         {
             //Console.WriteLine(e.ClientId + " message: " + e.Message);
 
-            MessageBus.Send(new SendHeartbeat { SenderType = HeartbeatSenderType.SenderPipe,
+            MessageBus.Send(new SendHeartbeat
+            { SenderType = Shared.TransportType.TransportPipe,
                                                 HbData = e.Message,
                                                 PipeName = e.ClientId} );
         }
@@ -88,7 +89,8 @@ namespace Monitor.Service
             // splitting ClientId into Ip and Port
             string[] data = e.ClientId.Split(new char[] { Constants.EndpointSeparator });
 
-            MessageBus.Send(new SendHeartbeat { SenderType = HeartbeatSenderType.SenderUdp,
+            MessageBus.Send(new SendHeartbeat
+            { SenderType = Shared.TransportType.TransportUdp,
                                                 HbData = e.Message,
                                                 IpAddress = data[0],
                                                 Port = int.Parse(data[1]) } );

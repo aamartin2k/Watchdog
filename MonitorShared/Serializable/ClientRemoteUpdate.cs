@@ -25,9 +25,10 @@ namespace Monitor.Shared
     {
 
         public Guid ClientId { get; set; }
-
+        public string Pipe { get; set; }
         public string Name { get; set; }
         public ClientIdType IdType { get; set; }
+        public TransportType TransportType { get; set; }
         public string Id { get; set; }
         public string AppFilePath { get; set; }
         public string LogFilePath { get; set; }
@@ -35,6 +36,7 @@ namespace Monitor.Shared
         public int Timeout { get; set; }
         public bool MailEnabled { get; set; }
         public bool LogAttachEnabled { get; set; }
+        public bool RestartEnabled { get; set; }
         public int QueueSize { get; set; }
     }
 }

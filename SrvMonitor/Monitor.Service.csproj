@@ -107,8 +107,10 @@
     <Compile Include="ClientManager\ClientMan_Test.cs" />
     <Compile Include="DataHandler\DbHandler.cs" />
     <None Include="General.cd" />
+    <Compile Include="Interfaces\IMessageOutput.cs" />
     <Compile Include="Notifier\EmailMessage.cs" />
-    <Compile Include="Output\COutput.cs" />
+    <Compile Include="Output\ConsoleOutput.cs" />
+    <Compile Include="Output\FileLogOutput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Notifier\Notifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

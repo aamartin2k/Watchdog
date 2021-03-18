@@ -23,6 +23,7 @@ namespace Monitor.Shared
 
         private bool _pending;
         private bool _nonNumberEntered = false;
+        private bool _spaceEntered = false;
         private bool _ignoreNameCheck;
         private string _serverUrl;
         private EditFormMode _mode;
@@ -104,24 +105,40 @@ namespace Monitor.Shared
             gbServer.Visible = false;
       
         }
-       
 
-       
+
+
 
         #endregion
 
         #region Controladores de eventos de controles
 
+        private void rbTran_CheckedChanged(object sender, EventArgs e)
+        {
+            bool check = rbTrnUdp.Checked;
+
+            rbKeyPort.Checked = check;
+            rbKeyPort.Enabled = check;
+            tbKeyPort.Enabled = check;
+
+            rbKeyPipe.Checked = !check;
+            rbKeyPipe.Enabled = !check;
+            tbKeyPipe.Enabled = !check;
+        }
 
         private void rbKey_CheckedChanged(object sender, EventArgs e)
         {
+            if (rbKeyId.Checked)
+                return;
+
             // obteniendo estado de rbKeyPort
             bool check = rbKeyPort.Checked;
 
-            // activar 
+            //// activar 
             tbKeyPort.Enabled = check;
-            // desativar
-            tbKeyID.Enabled = !check;
+            //// desativar
+            tbKeyPipe.Enabled = !check;
+
         }
 
         private bool ValidChar(char test)
@@ -244,14 +261,16 @@ namespace Monitor.Shared
        
         #region Validacion de entrada numérica en controles texto
 
+        // Garantizar que los controles de texto para valores numéricos solo acepten
+        // caracteres numero 0-9 y Backspace.
         private void tbNumeric_KeyDown(object sender, KeyEventArgs e)
         {
             _nonNumberEntered = false;
 
-            // Determine whether the keystroke is a number from the top of the keyboard.
+            // Detectar teclas numéricas del teclado normal .
             if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
             {
-                // Determine whether the keystroke is a number from the keypad.
+                // Detectar teclas numéricas del teclado auxiliar.
                 if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
                 {
                     // Determine whether the keystroke is a backspace.
@@ -268,7 +287,7 @@ namespace Monitor.Shared
 
         private void tbNumeric_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (_nonNumberEntered == true)
+            if (_nonNumberEntered)
             {
                 // Impedir entrada del caracter no numerico, determinado en tbNumeric_KeyDown
                 e.Handled = true;
@@ -276,17 +295,31 @@ namespace Monitor.Shared
 
         }
 
+        #endregion
 
+        // Garantizar que los controles de texto para valores Id y Pipe
+        // no contengas caracter espacio.
+        #region Validacion de entrada de Id y Pipe en controles texto
+        private void tbSpaceWarp_KeyDown(object sender, KeyEventArgs e)
+        {
+            _spaceEntered = false;
 
+            if (e.KeyCode == Keys.Space)
+                _spaceEntered = true;
+        }
 
+        private void tbSpaceWarp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (_spaceEntered)
+            {
+                // Impedir entrada del caracter espacio, determinado en tbSpaceWarp_KeyDown
+                e.Handled = true;
+            }
 
-
-
-
-
-
-
+        }
 
         #endregion
+
+
     }
 }

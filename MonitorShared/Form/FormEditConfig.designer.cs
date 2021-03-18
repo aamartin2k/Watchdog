@@ -78,6 +78,10 @@
             this.tbQueueSize = new System.Windows.Forms.TextBox();
             this.tbTimeout = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.chkAttachLog = new System.Windows.Forms.CheckBox();
+            this.chkEmail = new System.Windows.Forms.CheckBox();
+            this.btNewClient = new System.Windows.Forms.Button();
+            this.btDeleteClient = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbKeyPipe = new System.Windows.Forms.TextBox();
             this.rbKeyPipe = new System.Windows.Forms.RadioButton();
@@ -85,10 +89,10 @@
             this.rbKeyPort = new System.Windows.Forms.RadioButton();
             this.tbKeyID = new System.Windows.Forms.TextBox();
             this.tbKeyPort = new System.Windows.Forms.TextBox();
-            this.chkAttachLog = new System.Windows.Forms.CheckBox();
-            this.chkEmail = new System.Windows.Forms.CheckBox();
-            this.btNewClient = new System.Windows.Forms.Button();
-            this.btDeleteClient = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbTrnPipe = new System.Windows.Forms.RadioButton();
+            this.rbTrnUdp = new System.Windows.Forms.RadioButton();
+            this.chkRestart = new System.Windows.Forms.CheckBox();
             this.tbpCltStatus = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label19 = new System.Windows.Forms.Label();
@@ -140,8 +144,6 @@
             this.gbMainButtons = new System.Windows.Forms.GroupBox();
             this.lbWizard = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chkbTranspUdp = new System.Windows.Forms.CheckBox();
-            this.chkbTranspPipe = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tbpService.SuspendLayout();
             this.tbpServer.SuspendLayout();
@@ -151,6 +153,7 @@
             this.tbpClient.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tbpCltStatus.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tbpLogFile.SuspendLayout();
@@ -182,7 +185,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(502, 283);
+            this.tabControl1.Size = new System.Drawing.Size(522, 324);
             this.tabControl1.TabIndex = 2;
             // 
             // tbpService
@@ -191,7 +194,7 @@
             this.tbpService.Location = new System.Drawing.Point(4, 22);
             this.tbpService.Name = "tbpService";
             this.tbpService.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpService.Size = new System.Drawing.Size(494, 257);
+            this.tbpService.Size = new System.Drawing.Size(514, 298);
             this.tbpService.TabIndex = 9;
             this.tbpService.Text = "Servicio";
             this.tbpService.UseVisualStyleBackColor = true;
@@ -214,7 +217,7 @@
             this.tbpServer.Controls.Add(this.tableLayoutPanel3);
             this.tbpServer.Location = new System.Drawing.Point(4, 22);
             this.tbpServer.Name = "tbpServer";
-            this.tbpServer.Size = new System.Drawing.Size(494, 257);
+            this.tbpServer.Size = new System.Drawing.Size(514, 298);
             this.tbpServer.TabIndex = 4;
             this.tbpServer.Text = "Servidor";
             this.tbpServer.UseVisualStyleBackColor = true;
@@ -398,7 +401,7 @@
             this.tbpEmail.Controls.Add(this.tableLayoutPanel2);
             this.tbpEmail.Location = new System.Drawing.Point(4, 22);
             this.tbpEmail.Name = "tbpEmail";
-            this.tbpEmail.Size = new System.Drawing.Size(494, 257);
+            this.tbpEmail.Size = new System.Drawing.Size(514, 298);
             this.tbpEmail.TabIndex = 5;
             this.tbpEmail.Text = "Correo electrónico";
             this.tbpEmail.UseVisualStyleBackColor = true;
@@ -558,7 +561,7 @@
             this.tbpClient.Location = new System.Drawing.Point(4, 22);
             this.tbpClient.Name = "tbpClient";
             this.tbpClient.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpClient.Size = new System.Drawing.Size(494, 257);
+            this.tbpClient.Size = new System.Drawing.Size(514, 298);
             this.tbpClient.TabIndex = 0;
             this.tbpClient.Text = "Cliente";
             this.tbpClient.UseVisualStyleBackColor = true;
@@ -579,26 +582,28 @@
             this.tableLayoutPanel1.Controls.Add(this.tbName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label28, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tbQueueSize, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tbTimeout, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.chkAttachLog, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.chkEmail, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label28, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tbQueueSize, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tbTimeout, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.chkAttachLog, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.chkEmail, 3, 5);
             this.tableLayoutPanel1.Controls.Add(this.btNewClient, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btDeleteClient, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btDeleteClient, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.chkRestart, 4, 5);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(485, 240);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(485, 280);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tbLogPath
@@ -685,7 +690,7 @@
             // 
             this.label28.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(33, 218);
+            this.label28.Location = new System.Drawing.Point(33, 256);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(89, 13);
             this.label28.TabIndex = 18;
@@ -696,7 +701,7 @@
             // 
             this.tbQueueSize.AcceptsReturn = true;
             this.tbQueueSize.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbQueueSize.Location = new System.Drawing.Point(128, 215);
+            this.tbQueueSize.Location = new System.Drawing.Point(128, 253);
             this.tbQueueSize.Name = "tbQueueSize";
             this.tbQueueSize.Size = new System.Drawing.Size(50, 20);
             this.tbQueueSize.TabIndex = 19;
@@ -706,7 +711,7 @@
             // tbTimeout
             // 
             this.tbTimeout.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbTimeout.Location = new System.Drawing.Point(128, 186);
+            this.tbTimeout.Location = new System.Drawing.Point(128, 222);
             this.tbTimeout.Name = "tbTimeout";
             this.tbTimeout.Size = new System.Drawing.Size(50, 20);
             this.tbTimeout.TabIndex = 13;
@@ -717,44 +722,87 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(74, 189);
+            this.label5.Location = new System.Drawing.Point(74, 225);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "Timeout:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // chkAttachLog
+            // 
+            this.chkAttachLog.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.chkAttachLog.AutoSize = true;
+            this.chkAttachLog.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkAttachLog.Location = new System.Drawing.Point(235, 254);
+            this.chkAttachLog.Name = "chkAttachLog";
+            this.chkAttachLog.Size = new System.Drawing.Size(114, 17);
+            this.chkAttachLog.TabIndex = 20;
+            this.chkAttachLog.Text = "Enviar log adjunto:";
+            this.chkAttachLog.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkAttachLog.UseVisualStyleBackColor = true;
+            // 
+            // chkEmail
+            // 
+            this.chkEmail.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.chkEmail.AutoSize = true;
+            this.chkEmail.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkEmail.Location = new System.Drawing.Point(248, 223);
+            this.chkEmail.Name = "chkEmail";
+            this.chkEmail.Size = new System.Drawing.Size(101, 17);
+            this.chkEmail.TabIndex = 17;
+            this.chkEmail.Text = "   Enviar correo:";
+            this.chkEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkEmail.UseVisualStyleBackColor = true;
+            // 
+            // btNewClient
+            // 
+            this.btNewClient.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btNewClient.Location = new System.Drawing.Point(371, 3);
+            this.btNewClient.Name = "btNewClient";
+            this.btNewClient.Size = new System.Drawing.Size(95, 22);
+            this.btNewClient.TabIndex = 24;
+            this.btNewClient.Text = "Crear cliente";
+            this.btNewClient.UseVisualStyleBackColor = true;
+            // 
+            // btDeleteClient
+            // 
+            this.btDeleteClient.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btDeleteClient.Location = new System.Drawing.Point(371, 164);
+            this.btDeleteClient.Name = "btDeleteClient";
+            this.btDeleteClient.Size = new System.Drawing.Size(95, 25);
+            this.btDeleteClient.TabIndex = 7;
+            this.btDeleteClient.Text = "Eliminar cliente";
+            this.btDeleteClient.UseVisualStyleBackColor = true;
+            // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.groupBox1, 4);
-            this.groupBox1.Controls.Add(this.chkbTranspPipe);
-            this.groupBox1.Controls.Add(this.chkbTranspUdp);
             this.groupBox1.Controls.Add(this.tbKeyPipe);
             this.groupBox1.Controls.Add(this.rbKeyPipe);
             this.groupBox1.Controls.Add(this.rbKeyId);
             this.groupBox1.Controls.Add(this.rbKeyPort);
             this.groupBox1.Controls.Add(this.tbKeyID);
             this.groupBox1.Controls.Add(this.tbKeyPort);
-            this.groupBox1.Location = new System.Drawing.Point(3, 90);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 142);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(346, 89);
+            this.groupBox1.Size = new System.Drawing.Size(346, 73);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "  Identificador:";
+            this.groupBox1.Text = "  ID de cliente:";
             // 
             // tbKeyPipe
             // 
             this.tbKeyPipe.AcceptsReturn = true;
-            this.tbKeyPipe.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbKeyPipe.Enabled = false;
-            this.tbKeyPipe.Location = new System.Drawing.Point(214, 39);
+            this.tbKeyPipe.Location = new System.Drawing.Point(214, 42);
             this.tbKeyPipe.Name = "tbKeyPipe";
             this.tbKeyPipe.Size = new System.Drawing.Size(81, 20);
             this.tbKeyPipe.TabIndex = 26;
             this.tbKeyPipe.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbKeyPipe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSpaceWarp_KeyDown);
+            this.tbKeyPipe.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSpaceWarp_KeyPress);
             // 
             // rbKeyPipe
             // 
@@ -796,76 +844,82 @@
             // tbKeyID
             // 
             this.tbKeyID.AcceptsReturn = true;
-            this.tbKeyID.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbKeyID.Enabled = false;
-            this.tbKeyID.Location = new System.Drawing.Point(116, 39);
+            this.tbKeyID.Location = new System.Drawing.Point(116, 42);
             this.tbKeyID.Name = "tbKeyID";
             this.tbKeyID.Size = new System.Drawing.Size(81, 20);
             this.tbKeyID.TabIndex = 22;
             this.tbKeyID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbKeyID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSpaceWarp_KeyDown);
+            this.tbKeyID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSpaceWarp_KeyPress);
             // 
             // tbKeyPort
             // 
-            this.tbKeyPort.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tbKeyPort.Location = new System.Drawing.Point(18, 39);
+            this.tbKeyPort.Location = new System.Drawing.Point(18, 42);
             this.tbKeyPort.Name = "tbKeyPort";
             this.tbKeyPort.Size = new System.Drawing.Size(50, 20);
             this.tbKeyPort.TabIndex = 15;
             this.tbKeyPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNumeric_KeyDown);
             this.tbKeyPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNumeric_KeyPress);
             // 
-            // chkAttachLog
+            // groupBox2
             // 
-            this.chkAttachLog.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.chkAttachLog.AutoSize = true;
-            this.chkAttachLog.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkAttachLog.Location = new System.Drawing.Point(235, 216);
-            this.chkAttachLog.Name = "chkAttachLog";
-            this.chkAttachLog.Size = new System.Drawing.Size(114, 17);
-            this.chkAttachLog.TabIndex = 20;
-            this.chkAttachLog.Text = "Enviar log adjunto:";
-            this.chkAttachLog.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkAttachLog.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBox2, 4);
+            this.groupBox2.Controls.Add(this.rbTrnPipe);
+            this.groupBox2.Controls.Add(this.rbTrnUdp);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 90);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(346, 43);
+            this.groupBox2.TabIndex = 24;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Transporte:";
             // 
-            // chkEmail
+            // rbTrnPipe
             // 
-            this.chkEmail.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.chkEmail.AutoSize = true;
-            this.chkEmail.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkEmail.Location = new System.Drawing.Point(248, 187);
-            this.chkEmail.Name = "chkEmail";
-            this.chkEmail.Size = new System.Drawing.Size(101, 17);
-            this.chkEmail.TabIndex = 17;
-            this.chkEmail.Text = "   Enviar correo:";
-            this.chkEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkEmail.UseVisualStyleBackColor = true;
+            this.rbTrnPipe.AutoSize = true;
+            this.rbTrnPipe.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.rbTrnPipe.Location = new System.Drawing.Point(150, 20);
+            this.rbTrnPipe.Name = "rbTrnPipe";
+            this.rbTrnPipe.Size = new System.Drawing.Size(46, 17);
+            this.rbTrnPipe.TabIndex = 25;
+            this.rbTrnPipe.Text = "Pipe";
+            this.rbTrnPipe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rbTrnPipe.UseVisualStyleBackColor = true;
             // 
-            // btNewClient
+            // rbTrnUdp
             // 
-            this.btNewClient.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btNewClient.Location = new System.Drawing.Point(371, 3);
-            this.btNewClient.Name = "btNewClient";
-            this.btNewClient.Size = new System.Drawing.Size(95, 22);
-            this.btNewClient.TabIndex = 24;
-            this.btNewClient.Text = "Crear cliente";
-            this.btNewClient.UseVisualStyleBackColor = true;
+            this.rbTrnUdp.AutoSize = true;
+            this.rbTrnUdp.Checked = true;
+            this.rbTrnUdp.Location = new System.Drawing.Point(20, 20);
+            this.rbTrnUdp.Name = "rbTrnUdp";
+            this.rbTrnUdp.Size = new System.Drawing.Size(48, 17);
+            this.rbTrnUdp.TabIndex = 23;
+            this.rbTrnUdp.TabStop = true;
+            this.rbTrnUdp.Text = "UDP";
+            this.rbTrnUdp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rbTrnUdp.UseVisualStyleBackColor = true;
+            this.rbTrnUdp.CheckedChanged += new System.EventHandler(this.rbTran_CheckedChanged);
             // 
-            // btDeleteClient
+            // chkRestart
             // 
-            this.btDeleteClient.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btDeleteClient.Location = new System.Drawing.Point(371, 120);
-            this.btDeleteClient.Name = "btDeleteClient";
-            this.btDeleteClient.Size = new System.Drawing.Size(95, 25);
-            this.btDeleteClient.TabIndex = 7;
-            this.btDeleteClient.Text = "Eliminar cliente";
-            this.btDeleteClient.UseVisualStyleBackColor = true;
+            this.chkRestart.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.chkRestart.AutoSize = true;
+            this.chkRestart.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkRestart.Location = new System.Drawing.Point(412, 223);
+            this.chkRestart.Name = "chkRestart";
+            this.chkRestart.Size = new System.Drawing.Size(70, 17);
+            this.chkRestart.TabIndex = 25;
+            this.chkRestart.Text = "Reiniciar:";
+            this.chkRestart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkRestart.UseVisualStyleBackColor = true;
             // 
             // tbpCltStatus
             // 
             this.tbpCltStatus.Controls.Add(this.tableLayoutPanel4);
             this.tbpCltStatus.Location = new System.Drawing.Point(4, 22);
             this.tbpCltStatus.Name = "tbpCltStatus";
-            this.tbpCltStatus.Size = new System.Drawing.Size(494, 257);
+            this.tbpCltStatus.Size = new System.Drawing.Size(514, 298);
             this.tbpCltStatus.TabIndex = 3;
             this.tbpCltStatus.Text = "Estado del cliente";
             this.tbpCltStatus.UseVisualStyleBackColor = true;
@@ -1001,7 +1055,7 @@
             this.tbpLogFile.Controls.Add(this.rtbLog);
             this.tbpLogFile.Location = new System.Drawing.Point(4, 22);
             this.tbpLogFile.Name = "tbpLogFile";
-            this.tbpLogFile.Size = new System.Drawing.Size(494, 257);
+            this.tbpLogFile.Size = new System.Drawing.Size(514, 298);
             this.tbpLogFile.TabIndex = 7;
             this.tbpLogFile.Text = "Archivo Log";
             this.tbpLogFile.UseVisualStyleBackColor = true;
@@ -1024,7 +1078,7 @@
             this.tbpConsole.Location = new System.Drawing.Point(4, 22);
             this.tbpConsole.Name = "tbpConsole";
             this.tbpConsole.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpConsole.Size = new System.Drawing.Size(494, 257);
+            this.tbpConsole.Size = new System.Drawing.Size(514, 298);
             this.tbpConsole.TabIndex = 8;
             this.tbpConsole.Text = "Consola";
             this.tbpConsole.UseVisualStyleBackColor = true;
@@ -1050,7 +1104,7 @@
             this.tbpQueues.Controls.Add(this.tableLayoutPanelColas);
             this.tbpQueues.Location = new System.Drawing.Point(4, 22);
             this.tbpQueues.Name = "tbpQueues";
-            this.tbpQueues.Size = new System.Drawing.Size(494, 257);
+            this.tbpQueues.Size = new System.Drawing.Size(514, 298);
             this.tbpQueues.TabIndex = 6;
             this.tbpQueues.Text = "Colas";
             this.tbpQueues.UseVisualStyleBackColor = true;
@@ -1333,7 +1387,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(615, 283);
+            this.splitContainer1.Size = new System.Drawing.Size(635, 324);
             this.splitContainer1.SplitterDistance = 109;
             this.splitContainer1.TabIndex = 9;
             // 
@@ -1343,7 +1397,7 @@
             this.lbClients.FormattingEnabled = true;
             this.lbClients.Location = new System.Drawing.Point(0, 0);
             this.lbClients.Name = "lbClients";
-            this.lbClients.Size = new System.Drawing.Size(109, 283);
+            this.lbClients.Size = new System.Drawing.Size(109, 324);
             this.lbClients.TabIndex = 0;
             // 
             // tmrConnect
@@ -1360,9 +1414,9 @@
             this.gbMainButtons.Controls.Add(this.btOk);
             this.gbMainButtons.Controls.Add(this.btCancel);
             this.gbMainButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbMainButtons.Location = new System.Drawing.Point(0, 362);
+            this.gbMainButtons.Location = new System.Drawing.Point(0, 403);
             this.gbMainButtons.Name = "gbMainButtons";
-            this.gbMainButtons.Size = new System.Drawing.Size(624, 39);
+            this.gbMainButtons.Size = new System.Drawing.Size(644, 39);
             this.gbMainButtons.TabIndex = 10;
             this.gbMainButtons.TabStop = false;
             // 
@@ -1388,35 +1442,11 @@
             this.pictureBox1.TabIndex = 26;
             this.pictureBox1.TabStop = false;
             // 
-            // chkbTranspUdp
-            // 
-            this.chkbTranspUdp.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkbTranspUdp.AutoSize = true;
-            this.chkbTranspUdp.Location = new System.Drawing.Point(18, 65);
-            this.chkbTranspUdp.Name = "chkbTranspUdp";
-            this.chkbTranspUdp.Size = new System.Drawing.Size(103, 17);
-            this.chkbTranspUdp.TabIndex = 27;
-            this.chkbTranspUdp.Text = "Transporte UDP";
-            this.chkbTranspUdp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkbTranspUdp.UseVisualStyleBackColor = true;
-            // 
-            // chkbTranspPipe
-            // 
-            this.chkbTranspPipe.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkbTranspPipe.AutoSize = true;
-            this.chkbTranspPipe.Location = new System.Drawing.Point(214, 66);
-            this.chkbTranspPipe.Name = "chkbTranspPipe";
-            this.chkbTranspPipe.Size = new System.Drawing.Size(103, 17);
-            this.chkbTranspPipe.TabIndex = 28;
-            this.chkbTranspPipe.Text = "Transporte UDP";
-            this.chkbTranspPipe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkbTranspPipe.UseVisualStyleBackColor = true;
-            // 
             // FormEditConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 401);
+            this.ClientSize = new System.Drawing.Size(644, 442);
             this.Controls.Add(this.btApplyEdit);
             this.Controls.Add(this.btCancelEdit);
             this.Controls.Add(this.pictureBox1);
@@ -1443,6 +1473,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tbpCltStatus.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -1578,7 +1610,9 @@
         private System.Windows.Forms.TabPage tbpService;
         private System.Windows.Forms.TextBox tbKeyPipe;
         private System.Windows.Forms.RadioButton rbKeyPipe;
-        private System.Windows.Forms.CheckBox chkbTranspPipe;
-        private System.Windows.Forms.CheckBox chkbTranspUdp;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rbTrnPipe;
+        private System.Windows.Forms.RadioButton rbTrnUdp;
+        private System.Windows.Forms.CheckBox chkRestart;
     }
 }

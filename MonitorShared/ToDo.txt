@@ -7,6 +7,11 @@
 
 -Restructurar clases y carpetas del proyecto
 
+Refactor Formulario, Client manager y Cliengt Data con nuevas propiedades de Client, 
+  revisar todo el ciclo, crear, editar, guardar y cargar Cliente en GUI
+  implementar Lista de nombres de pipe
+
+
 
 Revisar ubicacion de las referencias a las clases en DllShared y reducir su presencia.
 

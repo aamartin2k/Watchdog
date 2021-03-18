@@ -102,13 +102,13 @@ namespace Monitor.Service
 
         private void StartHbReceiver()
         {
-            HbReceiverUdp.StartUdpServer(_udpServerIP, _udpServerPort);
+            //HbReceiverUdp.StartUdpServer(_udpServerIP, _udpServerPort);
             Builder.Output(string.Format(ClassName + ": Udp Server iniciado en Ip: {0} Puerto: {1}", _udpServerIP, _udpServerPort), System.Diagnostics.TraceEventType.Verbose);
         }
 
         private void StopHbReceiver()
         {
-            HbReceiverUdp.StopUdpServer();
+            //HbReceiverUdp.StopUdpServer();
             Builder.Output(ClassName + ": Udp Server detenido.", System.Diagnostics.TraceEventType.Verbose);
         }
 

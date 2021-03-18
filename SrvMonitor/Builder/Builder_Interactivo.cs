@@ -7,6 +7,7 @@
 #endregion
 
 #region Using
+using Monitor.Service.Output;
 using Monitor.Shared;
 using System;
 using System.Threading;
@@ -40,9 +41,9 @@ namespace Monitor.Service
             else    // Dos argumentos, Para Import/Export El segundo arg es filename.
                     // Para Console, el posible segundo argumento es  v verbose con - /
             if (args != null && args.Length == 2 && args[0].Length > 1 && args[1].Length > 1
-                   && (args[0][0] == '-' || args[0][0] == '/'))
+                   && (args[0][0] == cla_sep1 || args[0][0] == cla_sep2))
             {
-                // Eliminar separador arg '-' or '/'
+                // Eliminar separador  - o / del argumento y llevar a minuscula
                 primero = args[0].Substring(1).ToLower();
 
                 switch (primero)
@@ -65,7 +66,7 @@ namespace Monitor.Service
             }
             else    // UN argumento, varias opciones
             if (args != null && args.Length == 1 && args[0].Length > 1
-                    && (args[0][0] == '-' || args[0][0] == '/'))
+                    && (args[0][0] == cla_sep1 || args[0][0] == cla_sep2))
             {
                 // Replace args
                 primero = args[0].Substring(1).ToLower();
@@ -123,11 +124,14 @@ namespace Monitor.Service
             // Es imprescindible ejecutar este metodo antes de llamar a Builder.Output.
             ClientLogonEvent(new SupervisorClientLogEvent(SupervisorLoginType.Logoff));
 
-            // Preparando Consola
-            Console.Clear();
-            origRow = Console.CursorTop;
-            origCol = Console.CursorLeft;
-            baseRow = 0;
+            // Pasar a clase consoleoutput
+            // instanciar aqui
+            _messageOutput = new ConsoleOutput(OutputVerbose, false);
+
+            //Console.Clear();
+            //origRow = Console.CursorTop;
+            //origCol = Console.CursorLeft;
+            //baseRow = 0;
 
             Builder.Output("Iniciando Monitor.Service en modo interactivo.");
 

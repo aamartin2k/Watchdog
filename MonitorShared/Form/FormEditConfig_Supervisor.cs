@@ -487,7 +487,7 @@ namespace Monitor.Shared
             // crear clase de update
             ClientRemoteUpdate cltUpd = new ClientRemoteUpdate();
 
-            cltUpd.ClientId = _currentClient.ClientId;
+            cltUpd.ClientId = _currentClient.ClientGuId;
             cltUpd.Name = tbName.Text;
             cltUpd.AppFilePath = tbAppPath.Text;
             cltUpd.LogFilePath = tbLogPath.Text;
@@ -609,7 +609,7 @@ namespace Monitor.Shared
             {
                 ClientData clt = lbClients.SelectedItem as ClientData;
 
-                Out_SendClientDelete(new RemReqDeleteClient(clt.ClientId));
+                Out_SendClientDelete(new RemReqDeleteClient(clt.ClientGuId));
             }
         }
 

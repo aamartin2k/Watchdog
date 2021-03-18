@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 using Monitor.Service.Output;
+using Monitor.Service.Interfaces;
 #endregion
 
 namespace Monitor.Service
@@ -31,8 +32,9 @@ namespace Monitor.Service
         static private DbHandler _dbHandler;
         static private ZyanServer _zyanServer;
         static private Notifier _notifier;
-
-        static private COutput _consoleOutput;
+        
+        // Utileria
+        static private IMessageOutput _messageOutput;
 
         // Sub componente de ZyanServer.
         static private RemoteMonitor _remoteMonitor;
@@ -84,6 +86,9 @@ namespace Monitor.Service
 
         private const string cla_v = "v";
         private const string cla_verbose = "verbose";
+
+        private const char cla_sep1 = '-';
+        private const char cla_sep2 = '/';
 
         #endregion
 

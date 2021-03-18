@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorShared", "..\..\MonitorShared\MonitorShared.csproj", "{25526D87-EF13-4F4D-8391-572481DF2D1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SrvMonitor", "..\..\SrvMonitor\SrvMonitor.csproj", "{E596ED3E-5905-4A95-BF64-D4BB889A2694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinSupervisor", "..\..\WinSupervisor\WinSupervisor.csproj", "{0F9C154A-0530-40C1-9724-BEF236F58C91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25526D87-EF13-4F4D-8391-572481DF2D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25526D87-EF13-4F4D-8391-572481DF2D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25526D87-EF13-4F4D-8391-572481DF2D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25526D87-EF13-4F4D-8391-572481DF2D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E596ED3E-5905-4A95-BF64-D4BB889A2694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E596ED3E-5905-4A95-BF64-D4BB889A2694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E596ED3E-5905-4A95-BF64-D4BB889A2694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E596ED3E-5905-4A95-BF64-D4BB889A2694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F9C154A-0530-40C1-9724-BEF236F58C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F9C154A-0530-40C1-9724-BEF236F58C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F9C154A-0530-40C1-9724-BEF236F58C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F9C154A-0530-40C1-9724-BEF236F58C91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

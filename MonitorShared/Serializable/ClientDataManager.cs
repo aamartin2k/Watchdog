@@ -6,8 +6,6 @@
 
 #region Using
 using System;
-using System.Diagnostics;
-using System.Drawing;
 using System.Collections.Generic;
 #endregion
 
@@ -27,8 +25,10 @@ namespace Monitor.Shared
         private Dictionary<int, Guid> _listByPort;
         // Recuperacion de clientes por Nombre
         private Dictionary<string, Guid> _listByName;
+        //_listByPipe
+        // Recuperacion de clientes por Pipe
+        private Dictionary<string, Guid> _listByPipe;
 
-            
 
         // Constructor
         public ClientDataManager()
@@ -37,7 +37,7 @@ namespace Monitor.Shared
             _listById = new Dictionary<string, Guid>();
             _listByName = new Dictionary<string, Guid>();
             _listByPort = new Dictionary<int, Guid>();
-
+            _listByPipe = new Dictionary<string, Guid>();
         }
 
         // Propiedades
@@ -59,7 +59,7 @@ namespace Monitor.Shared
             get { return _clientDict.Values.Count; }
         }
         // Metodos
-        // Recuperacion de clientes
+        // Comprobacion de clientes
 
         public bool ContainsId(string id)
         {
@@ -75,8 +75,13 @@ namespace Monitor.Shared
         public bool ContainsName(string name)
         { return _listByName.ContainsKey(name); }
 
+        //ContainsPipe
+        public bool ContainsPipe(string name)
+        { return _listByPipe.ContainsKey(name); }
+
         public bool ContainsGuid(Guid key)
         { return _clientDict.ContainsKey(key); }
+
 
         // Recuperacion de un cliente por claves
         public ClientData GetClient(Guid guid)
@@ -86,6 +91,7 @@ namespace Monitor.Shared
             else
                 throw new Exception("Clave Guid desconocida!");
         }
+
 
         public ClientData GetClient(string id)
         {
@@ -178,21 +184,39 @@ namespace Monitor.Shared
             return false;
         }
 
+        public bool PipeInUseByOthers(string pipe, string name)
+        {
+
+            return false;
+        }
+
         // Gestion de clientes
         private void Add(ClientData client)
         {
             // generar UId
             Guid key = Guid.NewGuid();
 
-            client.ClientId = key;
+            client.ClientGuId = key;
             _clientDict.Add(key, client);
 
             _listByName.Add(client.Name, key);
 
-            if (client.IdType == ClientIdType.KeyByIdString)
-                _listById.Add(client.Id, key);
-            else
-                _listByPort.Add(client.Port, key);
+            
+            switch (client.IdType)
+            {
+                case ClientIdType.KeyByUdpPort:
+                    _listByPort.Add(client.Port, key);
+                    break;
+                case ClientIdType.KeyByIdString:
+                    _listById.Add(client.Id, key);
+                    break;
+
+                case ClientIdType.KeyByPipe:
+                    _listByPipe.Add(client.Pipe, key);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Delete(Guid key)
@@ -206,11 +230,12 @@ namespace Monitor.Shared
         public void CreateClientRemote(ClientRemoteUpdate newClt)
         {
             CreateClient(newClt.IdType,
-                        newClt.Id,
-                        newClt.Port,
-                        newClt.Name,
+                        newClt.TransportType,
+                        newClt.Id, newClt.Port,
+                        newClt.Name, newClt.Pipe,
                         newClt.AppFilePath, newClt.LogFilePath,
-                        newClt.Timeout, newClt.MailEnabled, newClt.LogAttachEnabled, newClt.QueueSize);
+                        newClt.Timeout, newClt.MailEnabled, newClt.LogAttachEnabled,
+                        newClt.RestartEnabled, newClt.QueueSize);
                         
         }
 
@@ -240,6 +265,7 @@ namespace Monitor.Shared
             _listById = new Dictionary<string, Guid>();
             _listByName = new Dictionary<string, Guid>();
             _listByPort = new Dictionary<int, Guid>();
+            _listByPipe = new Dictionary<string, Guid>();
 
             Guid key;
             ClientData client;
@@ -247,26 +273,41 @@ namespace Monitor.Shared
             foreach (var item in _clientDict)
             {
                 client = item.Value;
-                key = client.ClientId;
+                key = client.ClientGuId;
 
                 _listByName.Add(client.Name, key);
 
-                if (client.IdType == ClientIdType.KeyByIdString)
-                    _listById.Add(client.Id, key);
-                else
-                    _listByPort.Add(client.Port, key);
+                switch (client.IdType)
+                {
+                    case ClientIdType.KeyByUdpPort:
+                        _listByPort.Add(client.Port, key);
+                        break;
+                    case ClientIdType.KeyByIdString:
+                        _listById.Add(client.Id, key);
+                        break;
+
+                    case ClientIdType.KeyByPipe:
+                        _listByPipe.Add(client.Pipe, key);
+                        break;
+                    default:
+                        break;
+                }
+
             }
         }
 
 
         // Creacion de cliente
-        // Nuevo creador de clientes
-        public ClientData CreateClient(ClientIdType type, 
-                                        string id, 
-                                        int port, 
-                                        string name, 
-                                        string appPath, string logPath,
-                                        int timeout, bool mail, bool logAttach, int queueSize)
+        // Creador de clientes Pipe
+       
+        // Nuevo creador de clientes Udp
+        public ClientData CreateClient(ClientIdType type,
+                                       TransportType transType,
+                                       string id, int port,
+                                       string name, string pipe,
+                                       string appPath, string logPath,
+                                       int timeout, bool mail, bool logAttach, 
+                                       bool restart, int queueSize)
         {
             // Validacion de parametros
             // Claves
@@ -278,18 +319,10 @@ namespace Monitor.Shared
 
                 if (ContainsId(id))
                     throw new ArgumentException("El valor ya está registrado.", "id");
-
-                // Si el puerto NO es clave, puede ser cero. Si es distinto de cero, debe
-                // estar en el rango libre
-                if (port != 0  && (port < 1024 || port > 65535))
-                {
-                    throw new ArgumentOutOfRangeException("port", "El  valor debe estar entre 1024 y 65535.");
-                }
-
             }
-            else
+
+            if (type == ClientIdType.KeyByUdpPort)
             {
-                // Clave Puerto
                 if (port == 0)
                     throw new ArgumentException("El valor no puede ser cero.", "port");
 
@@ -301,6 +334,24 @@ namespace Monitor.Shared
                 if (ContainsPort(port))
                     throw new ArgumentException("El valor ya está registrado.", "port");
             }
+
+            if (type == ClientIdType.KeyByPipe)
+            {
+                // Clave Pipe
+                if (string.IsNullOrEmpty(pipe))
+                    throw new ArgumentException("El valor no puede ser nulo.", "pipe");
+
+                if (ContainsPipe(pipe))
+                    throw new ArgumentException("El valor ya está registrado.", "pipe");
+
+                // Si el puerto NO es clave, puede ser cero. Si es distinto de cero, debe
+                // estar en el rango libre
+                if (port != 0 && (port < 1024 || port > 65535))
+                {
+                    throw new ArgumentOutOfRangeException("port", "El  valor debe estar entre 1024 y 65535.");
+                }
+            }
+
             // name
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException("name", "El valor no puede ser nulo.");
@@ -321,132 +372,148 @@ namespace Monitor.Shared
             if (queueSize == 0)
                 throw new ArgumentException("El valor no puede ser cero.", "queueSize");
 
+            // Invocar creador real
+            return DoCreateClient(type, transType, id, port, name, pipe, appPath, logPath, timeout, mail, logAttach, restart, queueSize);
+
+
+        }
+
+        private ClientData DoCreateClient(ClientIdType type,
+                                        TransportType transType,
+                                        string id, int port,
+                                        string name, string pipe,
+                                        string appPath, string logPath,
+                                        int timeout, bool mail, bool logAttach,
+                                        bool restart, int queueSize)
+        {
             // Creacion del objeto
-            ClientData newClt = new ClientData();
-
-            newClt.IdType = type;
-            newClt.Id = id;
-            newClt.Port = port;
-            newClt.Name = name;
-            newClt.AppFilePath = appPath;
-            newClt.LogFilePath = logPath;
-            newClt.Timeout = timeout;
-            newClt.MailEnabled = mail;
-            newClt.LogAttachEnabled = logAttach;
-            newClt.QueueSize = queueSize;
-
-            Add(newClt);
-
-            return newClt;
-
-
-        }
-
-        /*
-        // Clave Id
-        public ClientData CreateClient(string id, string name, string appPath, string logPath,
-                                       int timeout, bool mail, bool logAttach, int queueSize)
-        {
-            // Validando datos
-            // Clave ID
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentException("El valor no puede ser nulo.", "id");
-
-            if (ContainsId(id))
-                throw new ArgumentException("El valor ya está registrado.", "id");
-
-            // name
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name", "El valor no puede ser nulo.");
-            if (ContainsName(name))
-                throw new ArgumentException("El valor ya está registrado.", "name");
-
-            // appPath
-            if (string.IsNullOrEmpty(appPath))
-                throw new ArgumentNullException("appPath", "El valor no puede ser nulo.");
-            // logPath
-            if (string.IsNullOrEmpty(logPath))
-                throw new ArgumentNullException("logPath", "El valor no puede ser nulo.");
-            // timeout
-            if (timeout == 0)
-                throw new ArgumentException("El valor no puede ser cero.", "timeout");
-            // queueSize
-            if (queueSize == 0)
-                throw new ArgumentException("El valor no puede ser cero.", "queueSize");
-
-
-            ClientData newClt = new ClientData();
-
-            newClt.IdType = ClientIdType.KeyByIdString;
-            newClt.Id = id;
-            newClt.Name = name;
-            newClt.AppFilePath = appPath;
-            newClt.LogFilePath = logPath;
-            newClt.Timeout = timeout;
-            newClt.MailEnabled = mail;
-            newClt.LogAttachEnabled = logAttach;
-            newClt.QueueSize = queueSize;
-
-            Add(newClt);
-
-            return newClt;
-        }
-
-        // Clave PuertoUdp
-        public ClientData CreateClient(int port, string name, string appPath, string logPath,
-                                       int timeout, bool mail, bool logAttach, int queueSize)
-        {
-           // Validando datos
-           // Clave Puerto
-           if (port == 0)
-                throw new ArgumentException("El valor no puede ser cero.", "port");
-
-            if (port < 1024 || port > 65535)
+            ClientData newClt = new ClientData()
             {
-                throw new ArgumentOutOfRangeException("port", "El  valor debe estar entre 1024 y 65535.");
+                IdType = type,
+                TransportType = transType,
+                Id = id,
+                Port = port,
+                Name = name,
+                Pipe = pipe,
+                AppFilePath = appPath,
+                LogFilePath = logPath,
+                Timeout = timeout,
+                MailEnabled = mail,
+                LogAttachEnabled = logAttach,
+                RestartEnabled = restart,
+                QueueSize = queueSize
+            };
+            
+
+            Add(newClt);
+
+            return newClt;
+        }
+            /*
+            // Clave Id
+            public ClientData CreateClient(string id, string name, string appPath, string logPath,
+                                           int timeout, bool mail, bool logAttach, int queueSize)
+            {
+                // Validando datos
+                // Clave ID
+                if (string.IsNullOrEmpty(id))
+                    throw new ArgumentException("El valor no puede ser nulo.", "id");
+
+                if (ContainsId(id))
+                    throw new ArgumentException("El valor ya está registrado.", "id");
+
+                // name
+                if (string.IsNullOrEmpty(name))
+                    throw new ArgumentNullException("name", "El valor no puede ser nulo.");
+                if (ContainsName(name))
+                    throw new ArgumentException("El valor ya está registrado.", "name");
+
+                // appPath
+                if (string.IsNullOrEmpty(appPath))
+                    throw new ArgumentNullException("appPath", "El valor no puede ser nulo.");
+                // logPath
+                if (string.IsNullOrEmpty(logPath))
+                    throw new ArgumentNullException("logPath", "El valor no puede ser nulo.");
+                // timeout
+                if (timeout == 0)
+                    throw new ArgumentException("El valor no puede ser cero.", "timeout");
+                // queueSize
+                if (queueSize == 0)
+                    throw new ArgumentException("El valor no puede ser cero.", "queueSize");
+
+
+                ClientData newClt = new ClientData();
+
+                newClt.IdType = ClientIdType.KeyByIdString;
+                newClt.Id = id;
+                newClt.Name = name;
+                newClt.AppFilePath = appPath;
+                newClt.LogFilePath = logPath;
+                newClt.Timeout = timeout;
+                newClt.MailEnabled = mail;
+                newClt.LogAttachEnabled = logAttach;
+                newClt.QueueSize = queueSize;
+
+                Add(newClt);
+
+                return newClt;
             }
 
-            if (ContainsPort(port))
-                throw new ArgumentException("El valor ya está registrado.", "port");
-            // name
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name", "El valor no puede ser nulo.");
-            if (ContainsName(name))
-                throw new ArgumentException("El valor ya está registrado.", "name");
+            // Clave PuertoUdp
+            public ClientData CreateClient(int port, string name, string appPath, string logPath,
+                                           int timeout, bool mail, bool logAttach, int queueSize)
+            {
+               // Validando datos
+               // Clave Puerto
+               if (port == 0)
+                    throw new ArgumentException("El valor no puede ser cero.", "port");
 
-            // appPath
-            if (string.IsNullOrEmpty(appPath))
-                throw new ArgumentNullException("appPath", "El valor no puede ser nulo.");
-            // logPath
-            if (string.IsNullOrEmpty(logPath))
-                throw new ArgumentNullException("logPath", "El valor no puede ser nulo.");
-            // timeout
-            if (timeout == 0)
-                throw new ArgumentException("El valor no puede ser cero.", "timeout");
-            // queueSize
-            if (queueSize == 0)
-                throw new ArgumentException("El valor no puede ser cero.", "queueSize");
+                if (port < 1024 || port > 65535)
+                {
+                    throw new ArgumentOutOfRangeException("port", "El  valor debe estar entre 1024 y 65535.");
+                }
 
-            // Creando objeto
-            ClientData newClt = new ClientData();
+                if (ContainsPort(port))
+                    throw new ArgumentException("El valor ya está registrado.", "port");
+                // name
+                if (string.IsNullOrEmpty(name))
+                    throw new ArgumentNullException("name", "El valor no puede ser nulo.");
+                if (ContainsName(name))
+                    throw new ArgumentException("El valor ya está registrado.", "name");
+
+                // appPath
+                if (string.IsNullOrEmpty(appPath))
+                    throw new ArgumentNullException("appPath", "El valor no puede ser nulo.");
+                // logPath
+                if (string.IsNullOrEmpty(logPath))
+                    throw new ArgumentNullException("logPath", "El valor no puede ser nulo.");
+                // timeout
+                if (timeout == 0)
+                    throw new ArgumentException("El valor no puede ser cero.", "timeout");
+                // queueSize
+                if (queueSize == 0)
+                    throw new ArgumentException("El valor no puede ser cero.", "queueSize");
+
+                // Creando objeto
+                ClientData newClt = new ClientData();
 
 
-            newClt.IdType = ClientIdType.KeyByUdpPort;
-            newClt.Port = port;
-            newClt.Name = name;
-            newClt.AppFilePath = appPath;
-            newClt.LogFilePath = logPath;
-            newClt.Timeout = timeout;
-            newClt.MailEnabled = mail;
-            newClt.LogAttachEnabled = logAttach;
-            newClt.QueueSize = queueSize;
+                newClt.IdType = ClientIdType.KeyByUdpPort;
+                newClt.Port = port;
+                newClt.Name = name;
+                newClt.AppFilePath = appPath;
+                newClt.LogFilePath = logPath;
+                newClt.Timeout = timeout;
+                newClt.MailEnabled = mail;
+                newClt.LogAttachEnabled = logAttach;
+                newClt.QueueSize = queueSize;
 
-            Add(newClt);
+                Add(newClt);
 
-            return newClt;
+                return newClt;
+            }
+
+            */
+
         }
-
-        */
-       
-    }
 }

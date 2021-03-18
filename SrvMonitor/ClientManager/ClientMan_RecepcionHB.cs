@@ -56,13 +56,13 @@ namespace Monitor.Service
             int senderPort = 0;
 
             // Temp. Usar if para separar dos posibles senders hasta ahora. Si se incrementan, cambiar por switch..
-            if (req.SenderType == HeartbeatSenderType.SenderUdp)
+            if (req.SenderType == TransportType.TransportUdp)
             {
                 senderIP = req.IpAddress;
                 senderPort = req.Port;
             }
 
-            if (req.SenderType == HeartbeatSenderType.SenderPipe)
+            if (req.SenderType == TransportType.TransportPipe)
             {
                 senderPipe = req.PipeName;
             }

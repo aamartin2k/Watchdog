@@ -205,7 +205,7 @@ namespace Monitor.Shared
         /// <summary>
         /// Tipo de emisor del mensaje.
         /// </summary>
-        public HeartbeatSenderType SenderType { get; set; }
+        public TransportType SenderType { get; set; }
 
         /// <summary>
         /// Puerto UDP de emisor del mensaje.

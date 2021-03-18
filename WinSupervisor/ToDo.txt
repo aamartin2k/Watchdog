@@ -1,0 +1,10 @@
+﻿ToDo File. Proyecto WinSupervisor
+
+---Implementar Uso de MessageBroker para conexion interna.
+
+---Creando prototipo de Zyan server+client para  probar/implementar
+
+---Implementando nuevo Inicio y relacion simple de contencion referncia entre los modulos
+  para acceder al formulario, usar acciones via  SyncContextSwitcher<FormConnected>.WireUp
+
+  Implementar deteccion de perdida de conexion, si se detiene el servidor mientras se ejecuta el supervisor

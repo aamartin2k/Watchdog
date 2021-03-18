@@ -23,12 +23,17 @@ namespace Monitor.Shared
         /// <summary>
         /// Clave unica para identificacion interna de los clientes.
         /// </summary>
-        public Guid ClientId { get; set; }
+        public Guid ClientGuId { get; set; }
 
         /// <summary>
         /// Enum para establecer el elemento clave en la identificacion externa de los clientes.
         /// </summary>
         public ClientIdType IdType { get; set; }
+
+        /// <summary>
+        /// Enum para especificar el tipo de  transporte empleado por el cliente.
+        /// </summary>
+        public TransportType TransportType { get; set; }
         /// <summary>
         /// Clave opcional para diferenciar los clientes.
         /// </summary>
@@ -70,6 +75,12 @@ namespace Monitor.Shared
         /// funcion de clave para identificacion externa en la primera implementacion de los clientes.
         /// </summary>
         public int Port { get; set; }
+       
+        /// <summary>
+        /// Nombre para identificar el pipe.
+        /// </summary>
+        public string Pipe { get; set; }
+
         /// <summary>
         /// Intervalo de tiempo que la aplicación debe cumplir, antes de declararla inactiva
         /// y proceder a su reinicio por el monitor. Valor en segundos.
@@ -83,6 +94,11 @@ namespace Monitor.Shared
         /// Valor booleano que indica si se envia el archivo log adjunto en la notificacion por correo electrónico.
         /// </summary>
         public bool LogAttachEnabled { get; set; }
+
+        /// <summary>
+        /// Valor booleano que indica si se reinicia el cliente al fallar.
+        /// </summary>
+        public bool RestartEnabled { get; set; }
 
         public int QueueSize
         {
@@ -101,10 +117,7 @@ namespace Monitor.Shared
             }
         }
 
-        /// <summary>
-        /// Nombre para identificar el pipe.
-        /// </summary>
-        public string Pipe { get; set; }
+       
 
 
         // Datos de estado

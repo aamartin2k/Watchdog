@@ -7,6 +7,7 @@
 #endregion
 
 #region Using
+using Monitor.Service.Output;
 using Monitor.Shared;
 using System;
 
@@ -20,8 +21,10 @@ namespace Monitor.Service
         #region Modo Consola
         static private void CargarTodosEjecutarConsole()
         {
-            writeBaseLine = true;
+            // instanciar aqui
+            _messageOutput = new ConsoleOutput(OutputVerbose, true);
 
+            
             Builder.Output("Ejecutando servicio en modo consola.");
 
             if (!ConfigurarComponentes())

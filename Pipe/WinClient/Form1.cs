@@ -92,7 +92,8 @@ namespace WinClientPipe
             HeartBeatGenerator hbgen = new HeartBeatGenerator
             {
                 ClientID = id,
-                UsarSerialHB = useSerial
+                UsarSerialHB = useSerial,
+                TimestampFormat = format
             };
             //                           
             _sender = new HeartbeatClient(server, pipe, 3, _enc, interv, hbgen);

@@ -201,15 +201,15 @@ namespace Monitor.Service
             client.Port = 0;
             client.QueueSize = 12;
             */
-            cdm.CreateClient(ClientIdType.KeyByIdString,
-                             "WC0001", 
+            cdm.CreateClient(ClientIdType.KeyByIdString, TransportType.TransportUdp,
+                             "WC0001",
                              0, 
-                             "WinClt01", 
+                             "WinClt01", null,
                              "c:\\Tmp\\ClientUdp\\wcudp1.exe", 
                              "c:\\Tmp\\ClientUdp\\wcudp1.txt",
-                             55, true, false, 12);
+                             55, true, false, true, 12);
             /*
-             Cliente con clave Port, puerto 50100
+             Cliente con clave Id, puerto 50100
 
             client = new ClientData();
             client.Name = "WinClt02";
@@ -222,13 +222,13 @@ namespace Monitor.Service
             client.Port = 50100;
             client.QueueSize = 24;
             */
-            cdm.CreateClient(ClientIdType.KeyByUdpPort,
+            cdm.CreateClient(ClientIdType.KeyByPipe, TransportType.TransportPipe,
                              null, 
-                             50100,
-                             "WinClt02",
+                             0,
+                             "WinClt02", "wdpipe",
                              "c:\\Tmp\\ClientUdp\\wcudp2.exe",
                              "c:\\Tmp\\ClientUdp\\wcudp2.txt",
-                             65, true, false, 24);
+                             65, true, false, true, 24);
             //// ... and again
 
             //client = new ClientData();
@@ -242,13 +242,13 @@ namespace Monitor.Service
             //client.Port = 50200;
             //client.QueueSize = 48;
 
-            cdm.CreateClient(ClientIdType.KeyByUdpPort,
+            cdm.CreateClient(ClientIdType.KeyByUdpPort, TransportType.TransportUdp,
                              null,
                              50200,
-                             "CConsole1",
+                             "CConsole1", null,
                              "c:\\Tmp\\ClientUdp\\cudp.cmd",
                              "c:\\Tmp\\ClientUdp\\cudp.txt",
-                             70, false, false, 48);
+                             70, false, false, true, 48);
 
             // config system
             SystemConfigData tmpSys = new SystemConfigData();

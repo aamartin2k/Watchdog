@@ -7,7 +7,7 @@
 -Reorganizar estructura de Monitor.Service
   Separar Builder en otras clases
 
-
+  revisar paso de objeto cliente a controles
 
  ---decidir e implementar forma de conexin entre clt y srv zyan (autodisc, guardar config local en supervispr) etc
  

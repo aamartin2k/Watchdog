@@ -17,5 +17,5 @@
 
     public enum ClientIdType { KeyByUdpPort, KeyByIdString, KeyByPipe }
 
-    public enum HeartbeatSenderType { SenderUdp, SenderPipe }
+    public enum TransportType { TransportUdp, TransportPipe }
 }

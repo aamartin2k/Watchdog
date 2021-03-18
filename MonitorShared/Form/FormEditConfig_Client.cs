@@ -55,7 +55,7 @@ namespace Monitor.Shared
                 e.Cancel = true;
         }
 
-        // Recibe referencia a un client para acualizar controles 
+        // Recibe referencia a un client para actualizar controles 
         private ClientData ClientData
         {
             get { return _currentClient; }
@@ -65,20 +65,46 @@ namespace Monitor.Shared
 
                
                 // pasar valores a controles form
-                tbKeyID.Text = _currentClient.Id;
                 tbName.Text = _currentClient.Name;
                 tbAppPath.Text = _currentClient.AppFilePath;
                 tbLogPath.Text = _currentClient.LogFilePath;
-                tbKeyPort.Text = _currentClient.Port.ToString();
+                
                 tbTimeout.Text = _currentClient.Timeout.ToString();
                 chkEmail.Checked = _currentClient.MailEnabled;
                 chkAttachLog.Checked = _currentClient.LogAttachEnabled;
                 tbQueueSize.Text = _currentClient.QueueSize.ToString();
 
-                if (_currentClient.IdType == ClientIdType.KeyByIdString)
-                    rbKeyId.Checked = true;
+                if (_currentClient.TransportType == TransportType.TransportUdp)
+                {
+                    rbTrnUdp.Checked = true;
+                    tbKeyPort.Text = _currentClient.Port.ToString();
+                }
                 else
-                    rbKeyPort.Checked = true;
+                {
+                    rbTrnPipe.Checked = true;
+                    tbKeyPipe.Text = _currentClient.Pipe;
+                }
+
+                
+                switch (_currentClient.IdType)
+                {
+                    case ClientIdType.KeyByUdpPort:
+                        rbKeyPort.Checked = true;
+                        break;
+
+                    case ClientIdType.KeyByIdString:
+                        rbKeyId.Checked = true;
+                        tbKeyID.Text = _currentClient.Id;
+                        break;
+
+                    case ClientIdType.KeyByPipe:
+                        rbKeyPipe.Checked = true;
+                        break;
+                    default:
+                        break;
+                }
+
+                chkRestart.Enabled = _currentClient.RestartEnabled;
 
                 CambiosPendientes = false;
 
@@ -300,8 +326,18 @@ namespace Monitor.Shared
             ClientIdType type;
             if (rbKeyId.Checked)
                 type = ClientIdType.KeyByIdString;
-            else
+
+            if (rbKeyPort.Checked)
                 type = ClientIdType.KeyByUdpPort;
+
+            type = ClientIdType.KeyByPipe;
+
+
+            TransportType trnType;
+            if (rbTrnUdp.Checked)
+                trnType = TransportType.TransportUdp;
+            else
+                trnType = TransportType.TransportPipe;
 
             int port;
             if (tbKeyPort.Text.Length == 0)
@@ -310,13 +346,14 @@ namespace Monitor.Shared
                 port = int.Parse(tbKeyPort.Text);
 
             // Creando cliente con metodo factory
-            ClientList.CreateClient(type, 
+            ClientList.CreateClient(type, trnType, 
                                     tbKeyID.Text,
                                     port, 
-                                    tbName.Text,
+                                    tbName.Text, tbKeyPipe.Text,
                                     tbAppPath.Text, tbLogPath.Text,
                                     int.Parse(tbTimeout.Text),
                                     chkEmail.Checked, chkAttachLog.Checked,
+                                    chkRestart.Enabled,
                                     int.Parse(tbQueueSize.Text)  );
 
 
@@ -331,7 +368,7 @@ namespace Monitor.Shared
             {
                 ClientData clt = lbClients.SelectedItem as ClientData;
 
-                ClientList.Delete(clt.ClientId);
+                ClientList.Delete(clt.ClientGuId);
                 ClientList = _clientList;
             }
         }
@@ -356,8 +393,7 @@ namespace Monitor.Shared
                 return false;
             }
 
-
-            // Chequear texto Id si esta seleccionado rbutton ID
+            // Chequear texto Id si esta seleccionado como clave
             if (rbKeyId.Checked)
             {
                 if (tbKeyID.Text.Length == 0)
@@ -375,7 +411,9 @@ namespace Monitor.Shared
                     return false;
                 }
             }
-            else  // Chequear puerto
+
+            // Chequear texto Puerto si esta seleccionado como transporte
+            if (rbTrnUdp.Checked)  
             {
                 if (tbKeyPort.Text.Length == 0)
                 {
@@ -391,16 +429,34 @@ namespace Monitor.Shared
                     tbKeyPort.Focus();
                     return false;
                 }
+            }
+            // Chequear texto Pipe si esta seleccionado como transporte
+            if (rbTrnPipe.Checked)
+            {
+                if (tbKeyPipe.Text.Length == 0)
+                {
+                    MessageBox.Show("Se requiere un nombre de Pipe.");
+                    tbKeyPipe.Focus();
+                    return false;
+                }
 
+                bool flag = ClientList.ContainsPipe(tbKeyPipe.Text);
+                if (flag)
+                {
+                    MessageBox.Show("El Pipe ya está registrado. Se requiere un Pipe diferente.");
+                    tbKeyPipe.Focus();
+                    return false;
+                }
             }
 
+            // Chequear texto Ruta a la aplicacion
             if ((tbAppPath.Text.Length == 0) || (!System.IO.File.Exists(tbAppPath.Text)))
             {
                 MessageBox.Show("La ruta al archivo de aplicación no es válida.");
                 tbAppPath.Focus();
                 return false;
             }
-
+            // Chequear texto Ruta al log
             if ((tbLogPath.Text.Length == 0) || !System.IO.File.Exists(tbLogPath.Text))
             {
                 MessageBox.Show("La ruta al archivo de log no es válida.");

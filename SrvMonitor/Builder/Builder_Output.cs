@@ -82,23 +82,30 @@ namespace Monitor.Service
 
         #region Utileria Output
 
-        //Utilitarios para escritura de mensajes en consola manteniendo el mensaje base
-        private static int origRow;
-        private static int origCol;
-        private static int baseRow;
-        private static object refLock = new object();
-
-        // Diferenciar mensajes de servicio en modo consola de los demas: install, uninstall, interactive etc.
-        private static bool writeBaseLine = false;
-
-        private const string baseMsg = "<presione Enter para terminar el servicio...>                                                                   ";
-        private const string baseClr = "                                                                                                                ";
-
         internal static void Output(string newMess)
         {
             Output(newMess, TraceEventType.Information);
         }
 
+        internal static void Output(string newMess, TraceEventType type)
+        {
+            _messageOutput.Write(newMess, type);
+        }
+
+
+        ////Utilitarios para escritura de mensajes en consola manteniendo el mensaje base
+        //private static int origRow;
+        //private static int origCol;
+        //private static int baseRow;
+        //private static object refLock = new object();
+
+        // Diferenciar mensajes de servicio en modo consola de los demas: install, uninstall, interactive etc.
+        //private static bool writeBaseLine = false;
+
+        //private const string baseMsg = "<presione Enter para terminar el servicio...>                                                                   ";
+        //private const string baseClr = "                                                                                                                ";
+        /*
+       
         internal static void Output(string newMess, TraceEventType type)
         {
             // Empeando compilacion condicional para obviar este metodo 
@@ -129,7 +136,6 @@ namespace Monitor.Service
             }
         }
 
-        
         private static void WriteAtBase(string newMess, TraceEventType type)
         {
 
@@ -182,6 +188,7 @@ namespace Monitor.Service
                 Console.WriteLine(e.Message);
             }
         }
+        */
 
 #endregion
     }

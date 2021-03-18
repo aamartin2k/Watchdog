@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udpipe", "Udpipe\Udpipe.csproj", "{6AF3B8DB-2AFD-4257-9562-FA1752C27C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{33068DB6-3862-422A-A6F9-69F10DCE2501}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{A828C9B3-F5A7-4FA6-B5EB-ACB7395684CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AF3B8DB-2AFD-4257-9562-FA1752C27C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF3B8DB-2AFD-4257-9562-FA1752C27C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF3B8DB-2AFD-4257-9562-FA1752C27C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF3B8DB-2AFD-4257-9562-FA1752C27C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33068DB6-3862-422A-A6F9-69F10DCE2501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33068DB6-3862-422A-A6F9-69F10DCE2501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33068DB6-3862-422A-A6F9-69F10DCE2501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33068DB6-3862-422A-A6F9-69F10DCE2501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A828C9B3-F5A7-4FA6-B5EB-ACB7395684CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A828C9B3-F5A7-4FA6-B5EB-ACB7395684CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A828C9B3-F5A7-4FA6-B5EB-ACB7395684CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A828C9B3-F5A7-4FA6-B5EB-ACB7395684CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
